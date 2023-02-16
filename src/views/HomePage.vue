@@ -1,3 +1,17 @@
 <template>
-  <h1 class="text-3xl font-bold underline">Hello world!</h1>
+  <NavbarFooter> </NavbarFooter>
 </template>
+
+<script>
+import NavbarFooter from "@/layouts/NavbarFooter.vue";
+export default {
+  name: "HomePage",
+  data() {
+    return {};
+  },
+  components: {
+    NavbarFooter,
+  },
+  setup() {},
+};
+</script>
