@@ -1,11 +1,10 @@
 <template>
-  <NavbarFooter>home</NavbarFooter>
+  <NavbarFooter>about</NavbarFooter>
 </template>
-
 <script>
 import NavbarFooter from "@/layouts/NavbarFooter.vue";
 export default {
-  name: "HomePage",
+  name: "About",
   data() {
     return {};
   },
