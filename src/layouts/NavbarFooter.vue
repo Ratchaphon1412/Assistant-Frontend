@@ -1,7 +1,7 @@
 <template>
   <main>
     <Navbar />
-    <div class="mx-auto w-full">
+    <div class="mx-auto w-full max-h-screen">
       <slot />
     </div>
     <Footer />
