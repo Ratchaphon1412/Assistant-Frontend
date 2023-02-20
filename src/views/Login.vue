@@ -1,7 +1,6 @@
 <template>
   <NavbarFooter>
     <LoginCard />
-    <ImageLogin />
   </NavbarFooter>
 </template>
 <script>
