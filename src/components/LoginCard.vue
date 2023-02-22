@@ -169,6 +169,8 @@
 
 <script>
 import ImageLogin from "@/components/Image/ImageLogin.vue";
+// import { auth } from "@/helpers/auth/index.js";
+import { useAuthStore } from "@/stores/authStore.js";
 export default {
   name: "LoginCard",
   data() {
@@ -181,8 +183,12 @@ export default {
     ImageLogin,
   },
   methods: {
-    login() {
+    async login() {
       // console.log(this.username, this.password);
+      // let response = await auth.login(this.username, this.password);
+      // console.log(response);
+      const store = useAuthStore();
+      store.login(this.username, this.password);
     },
   },
 };
