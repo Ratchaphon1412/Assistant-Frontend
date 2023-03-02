@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useAuthStore} from "@/stores/authStore.js";
+// import {useAuthStore} from "@/stores/authStore.js";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8000/',
@@ -12,13 +12,13 @@ axios.interceptors.response.use(
     (response) => response,async error =>{
         const originalRequest = error.config;
         if(error.response.status === 401){
-           const {status,data} = await axiosInstance.post('auth/jwt/refresh/', {"refresh": useAuthStore().refreshToken},{
+           const {status,data} = await axiosInstance.post('auth/jwt/refresh/', {"refresh": localStorage.getItem('refresh') },{
             withCredentials: true,
            });
            if(status === 200){
-               useAuthStore().accessToken = data.access;
-               console.log(data.access);
-               axiosInstance.defaults.headers.common['Authorization'] = `JWT ${data.access}`;
+            //    useAuthStore().accessToken = data.access;
+            //    console.log(data.access);
+               axiosInstance.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('access')}`;
                return axiosInstance(originalRequest);
            }
         }

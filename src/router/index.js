@@ -1,4 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore.js'
+
+const authStore = useAuthStore();
+function guardMyroute(to, from, next) {
+ 
+    if(authStore.isAuthenticated.value){
+      next();
+    }
+    else{
+      next('/login');
+    }
+  
+  
+}
 
 
 const router = createRouter({
@@ -26,6 +40,7 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
+      beforeEnter : guardMyroute,
       component: ()  =>  import('@/views/Dashboard.vue')
     }
     

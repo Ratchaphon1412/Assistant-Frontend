@@ -3,18 +3,20 @@ import { ref, computed } from 'vue'
 import {auth} from '@/helpers/auth/index.js'
 
 export const useAuthStore = defineStore('auth', () => {
-  const accessToken = ref(null)
-  const refreshToken = ref(null)
+ 
   const userID = ref(null)
-  const isAuthenticated = computed(() => !!accessToken.value)
+  const isAuthenticated = computed(() => !!localStorage.getItem('access'))
+  // const isAuthenticated = computed(() => !!userID.value)
 
   async function login(email, password) {
     const response = await auth.login(email, password)
-    accessToken.value = response.access
-    refreshToken.value = response.refresh
-    let responseAuth = await auth.me(accessToken.value)
+
+    localStorage.setItem( 'access', response.access);
+    localStorage.setItem( 'refresh', response.refresh);
+   
+    let responseAuth = await auth.me(localStorage.getItem('access'))
     userID.value = responseAuth.id
-    console.log(accessToken.value, refreshToken.value, userID.value);
+    console.log(userID.value,localStorage.getItem('access'),localStorage.getItem('refresh'));
   }
   async function register(email,username,password,first_name,last_name){
     const response = await auth.register(email,username,password,first_name,last_name)
@@ -23,18 +25,15 @@ export const useAuthStore = defineStore('auth', () => {
 
 
   async function logout() {
-    accessToken.value = null
-    refreshToken.value = null
+
     userID.value = null
   }
 
   return {
-    accessToken,
     userID,
     isAuthenticated,
     login,
     register,
-    // refresh,
     logout,
   }
 })

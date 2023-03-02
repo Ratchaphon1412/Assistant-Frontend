@@ -1,7 +1,7 @@
 <template>
   <NavbarFooter>
     <div>
-      <WorldModel />
+      <!-- <WorldModel /> -->
     </div>
   </NavbarFooter>
 </template>

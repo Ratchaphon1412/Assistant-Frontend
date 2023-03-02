@@ -189,6 +189,10 @@ export default {
       // console.log(response);
       const store = useAuthStore();
       store.login(this.username, this.password);
+
+      if (store.isAuthenticated) {
+        this.$router.push("/dashboard");
+      }
     },
   },
 };
